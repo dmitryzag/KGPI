@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="column is-12">
+    <div class="card">
+
+        <div class="card-content">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="/">Расписание</a></li>
+                    <li><a href="/faculties">Факультеты</a></li>
+                    <li><a href="/faculties/{{items.0.slug}}/">{{items.0.short_name}}</a></li>
+                    <li><a href="/faculties/{{items.0.slug}}/{{items.1.slug}}/"
+                            class="disabled">{{items.1.short_name}}</a></li>
+
+                </ul>
+            </nav>
+
+            <div class="content">
+                <h1>Группы</h1>
+                {% for group in groups %}
+
+                <a href="{{group.get_absolute_url}}">{{group}}</a>
+                <br>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+{% endblock %}

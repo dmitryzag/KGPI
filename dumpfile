@@ -1,0 +1,2057 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.14
+-- Dumped by pg_dump version 14.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_groups (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: base_auditory; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_auditory (
+    id bigint NOT NULL,
+    building_id bigint,
+    floor integer,
+    num_auditory integer
+);
+
+
+ALTER TABLE public.base_auditory OWNER TO postgres;
+
+--
+-- Name: base_auditory_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_auditory_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_auditory_id_seq OWNER TO postgres;
+
+--
+-- Name: base_auditory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_auditory_id_seq OWNED BY public.base_auditory.id;
+
+
+--
+-- Name: base_building; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_building (
+    id bigint NOT NULL,
+    address character varying(200),
+    enclosure integer
+);
+
+
+ALTER TABLE public.base_building OWNER TO postgres;
+
+--
+-- Name: base_building_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_building_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_building_id_seq OWNER TO postgres;
+
+--
+-- Name: base_building_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_building_id_seq OWNED BY public.base_building.id;
+
+
+--
+-- Name: base_dayofweek; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_dayofweek (
+    id bigint NOT NULL,
+    week date NOT NULL
+);
+
+
+ALTER TABLE public.base_dayofweek OWNER TO postgres;
+
+--
+-- Name: base_dayofweek_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_dayofweek_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_dayofweek_id_seq OWNER TO postgres;
+
+--
+-- Name: base_dayofweek_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_dayofweek_id_seq OWNED BY public.base_dayofweek.id;
+
+
+--
+-- Name: base_faculty; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_faculty (
+    id bigint NOT NULL,
+    name character varying(200),
+    short_name character varying(200),
+    slug character varying(50)
+);
+
+
+ALTER TABLE public.base_faculty OWNER TO postgres;
+
+--
+-- Name: base_faculty_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_faculty_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_faculty_id_seq OWNER TO postgres;
+
+--
+-- Name: base_faculty_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_faculty_id_seq OWNED BY public.base_faculty.id;
+
+
+--
+-- Name: base_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_group (
+    id bigint NOT NULL,
+    faculty_id bigint,
+    num integer,
+    slug character varying(50),
+    speciality_id bigint,
+    year integer
+);
+
+
+ALTER TABLE public.base_group OWNER TO postgres;
+
+--
+-- Name: base_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_group_id_seq OWNER TO postgres;
+
+--
+-- Name: base_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_group_id_seq OWNED BY public.base_group.id;
+
+
+--
+-- Name: base_schedule; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_schedule (
+    id bigint NOT NULL,
+    auditory_id bigint,
+    group_id bigint,
+    id_name_id bigint,
+    lesson_id bigint,
+    lesson_type character varying(200),
+    slug character varying(50),
+    teacher_id bigint,
+    day_id bigint,
+    parity_id bigint
+);
+
+
+ALTER TABLE public.base_schedule OWNER TO postgres;
+
+--
+-- Name: base_schedule_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_schedule_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_schedule_id_seq OWNER TO postgres;
+
+--
+-- Name: base_schedule_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_schedule_id_seq OWNED BY public.base_schedule.id;
+
+
+--
+-- Name: base_speciality; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_speciality (
+    id bigint NOT NULL,
+    faculty_id bigint,
+    name character varying(200),
+    short_name character varying(200),
+    slug character varying(50)
+);
+
+
+ALTER TABLE public.base_speciality OWNER TO postgres;
+
+--
+-- Name: base_speciality_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_speciality_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_speciality_id_seq OWNER TO postgres;
+
+--
+-- Name: base_speciality_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_speciality_id_seq OWNED BY public.base_speciality.id;
+
+
+--
+-- Name: base_subject; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_subject (
+    id bigint NOT NULL,
+    subject character varying(200)
+);
+
+
+ALTER TABLE public.base_subject OWNER TO postgres;
+
+--
+-- Name: base_subject_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_subject_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_subject_id_seq OWNER TO postgres;
+
+--
+-- Name: base_subject_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_subject_id_seq OWNED BY public.base_subject.id;
+
+
+--
+-- Name: base_teacher; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_teacher (
+    id bigint NOT NULL,
+    firstname character varying(200),
+    slug character varying(50),
+    email character varying(254),
+    image character varying(100),
+    patronymic text,
+    phone text,
+    "position" text,
+    surname text,
+    location text
+);
+
+
+ALTER TABLE public.base_teacher OWNER TO postgres;
+
+--
+-- Name: base_teacher_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_teacher_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_teacher_id_seq OWNER TO postgres;
+
+--
+-- Name: base_teacher_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_teacher_id_seq OWNED BY public.base_teacher.id;
+
+
+--
+-- Name: base_time; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_time (
+    id bigint NOT NULL,
+    begin time without time zone,
+    ending time without time zone
+);
+
+
+ALTER TABLE public.base_time OWNER TO postgres;
+
+--
+-- Name: base_time_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_time_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_time_id_seq OWNER TO postgres;
+
+--
+-- Name: base_time_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_time_id_seq OWNED BY public.base_time.id;
+
+
+--
+-- Name: base_weekparity; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.base_weekparity (
+    id bigint NOT NULL,
+    parity text NOT NULL
+);
+
+
+ALTER TABLE public.base_weekparity OWNER TO postgres;
+
+--
+-- Name: base_weekparity_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.base_weekparity_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.base_weekparity_id_seq OWNER TO postgres;
+
+--
+-- Name: base_weekparity_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.base_weekparity_id_seq OWNED BY public.base_weekparity.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: base_auditory id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_auditory ALTER COLUMN id SET DEFAULT nextval('public.base_auditory_id_seq'::regclass);
+
+
+--
+-- Name: base_building id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_building ALTER COLUMN id SET DEFAULT nextval('public.base_building_id_seq'::regclass);
+
+
+--
+-- Name: base_dayofweek id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_dayofweek ALTER COLUMN id SET DEFAULT nextval('public.base_dayofweek_id_seq'::regclass);
+
+
+--
+-- Name: base_faculty id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_faculty ALTER COLUMN id SET DEFAULT nextval('public.base_faculty_id_seq'::regclass);
+
+
+--
+-- Name: base_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_group ALTER COLUMN id SET DEFAULT nextval('public.base_group_id_seq'::regclass);
+
+
+--
+-- Name: base_schedule id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule ALTER COLUMN id SET DEFAULT nextval('public.base_schedule_id_seq'::regclass);
+
+
+--
+-- Name: base_speciality id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_speciality ALTER COLUMN id SET DEFAULT nextval('public.base_speciality_id_seq'::regclass);
+
+
+--
+-- Name: base_subject id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_subject ALTER COLUMN id SET DEFAULT nextval('public.base_subject_id_seq'::regclass);
+
+
+--
+-- Name: base_teacher id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_teacher ALTER COLUMN id SET DEFAULT nextval('public.base_teacher_id_seq'::regclass);
+
+
+--
+-- Name: base_time id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_time ALTER COLUMN id SET DEFAULT nextval('public.base_time_id_seq'::regclass);
+
+
+--
+-- Name: base_weekparity id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_weekparity ALTER COLUMN id SET DEFAULT nextval('public.base_weekparity_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add subject	7	add_subject
+26	Can change subject	7	change_subject
+27	Can delete subject	7	delete_subject
+28	Can view subject	7	view_subject
+29	Can add teacher	8	add_teacher
+30	Can change teacher	8	change_teacher
+31	Can delete teacher	8	delete_teacher
+32	Can view teacher	8	view_teacher
+33	Can add faculty	9	add_faculty
+34	Can change faculty	9	change_faculty
+35	Can delete faculty	9	delete_faculty
+36	Can view faculty	9	view_faculty
+37	Can add speciality	10	add_speciality
+38	Can change speciality	10	change_speciality
+39	Can delete speciality	10	delete_speciality
+40	Can view speciality	10	view_speciality
+41	Can add building	11	add_building
+42	Can change building	11	change_building
+43	Can delete building	11	delete_building
+44	Can view building	11	view_building
+45	Can add time	12	add_time
+46	Can change time	12	change_time
+47	Can delete time	12	delete_time
+48	Can view time	12	view_time
+49	Can add group	13	add_group
+50	Can change group	13	change_group
+51	Can delete group	13	delete_group
+52	Can view group	13	view_group
+53	Can add auditory	14	add_auditory
+54	Can change auditory	14	change_auditory
+55	Can delete auditory	14	delete_auditory
+56	Can view auditory	14	view_auditory
+57	Can add schedule	15	add_schedule
+58	Can change schedule	15	change_schedule
+59	Can delete schedule	15	delete_schedule
+60	Can view schedule	15	view_schedule
+61	Can add day of week	16	add_dayofweek
+62	Can change day of week	16	change_dayofweek
+63	Can delete day of week	16	delete_dayofweek
+64	Can view day of week	16	view_dayofweek
+65	Can add week parity	17	add_weekparity
+66	Can change week parity	17	change_weekparity
+67	Can delete week parity	17	delete_weekparity
+68	Can view week parity	17	view_weekparity
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$320000$UXgD5oJ4cVlpkWLozAQRhn$+zc9lBuj8JhEW4O1UqZ6evNbV4unU6E6CZocShqPZ8I=	2022-05-02 08:43:59.615417+07	t	zagib			zagibalovdmitry@gmail.com	t	t	2022-05-01 18:40:32.498831+07
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: base_auditory; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_auditory (id, building_id, floor, num_auditory) FROM stdin;
+1	1	7	711
+\.
+
+
+--
+-- Data for Name: base_building; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_building (id, address, enclosure) FROM stdin;
+1	Металлургов 14	4
+\.
+
+
+--
+-- Data for Name: base_dayofweek; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_dayofweek (id, week) FROM stdin;
+1	2022-05-01
+2	2022-05-02
+3	2022-05-03
+\.
+
+
+--
+-- Data for Name: base_faculty; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_faculty (id, name, short_name, slug) FROM stdin;
+1	Факультет Математики, Информатики и Экономики	ФИМЭ	fime
+2	Факультет Филологии	ФФ	ff
+\.
+
+
+--
+-- Data for Name: base_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_group (id, faculty_id, num, slug, speciality_id, year) FROM stdin;
+1	1	1	pmi-19-1	1	19
+2	2	1	filology	2	19
+\.
+
+
+--
+-- Data for Name: base_schedule; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_schedule (id, auditory_id, group_id, id_name_id, lesson_id, lesson_type, slug, teacher_id, day_id, parity_id) FROM stdin;
+4	1	1	2	2	Лекция	fime	1	1	1
+6	1	1	1	1	Практика	fime	1	2	2
+7	1	1	3	4	Практика	pmi	1	1	1
+3	1	1	1	1	Практика	first	1	1	1
+5	1	1	1	3	Лекция	first	1	1	1
+8	1	1	3	5	Лекция	first	2	2	2
+9	1	1	4	1	практика	pmi-19-1	3	3	3
+\.
+
+
+--
+-- Data for Name: base_speciality; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_speciality (id, faculty_id, name, short_name, slug) FROM stdin;
+1	1	Прикладная математика и информатика	ПМИ	pmi
+2	2	Филологи	ФФ	fucking_bitches
+\.
+
+
+--
+-- Data for Name: base_subject; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_subject (id, subject) FROM stdin;
+1	Математический анализ
+2	язык
+3	Базы данных
+4	Филология
+\.
+
+
+--
+-- Data for Name: base_teacher; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_teacher (id, firstname, slug, email, image, patronymic, phone, "position", surname, location) FROM stdin;
+3	Елена	reshetnikova_elena_vasilevna	elenares@yandex.ru	media/Решетникова_ЕВ.jpg.600x648_q85_box-1104048084000_crop_detail.jpg	Васильевна	+7-(3843)-74-46-78	Зав. кафедрой, кандидат наук, ученое звание доцент	Решетникова	\N
+2	Юлия	gavrilova_juila_sergeevna	mellamorry@yandex.ru	media/Гаврилова_ЮС.jpg.600x648_q85_box-1120046393790_crop_detail.jpg	Сергеевна		Старший преподаватель без степени	Гаврилова	
+1	Евегний	viachkin_evgeniy_sergeevich	viachkine@mail.ru	media/Вячкин_ЕС.jpg.600x648_q85_box-860045734000_crop_detail.jpg	Сергеевич		Доцент, кандидат наук, без ученого звания\r\nЗаместитель декана по научной работе	Вячкин	Корпус №2 (пр-кт Пионерский, 13), каб. №217
+\.
+
+
+--
+-- Data for Name: base_time; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_time (id, begin, ending) FROM stdin;
+1	08:30:00	10:05:00
+2	10:15:00	11:50:00
+3	12:15:00	13:50:00
+4	14:00:00	15:35:00
+5	16:00:00	17:35:00
+\.
+
+
+--
+-- Data for Name: base_weekparity; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.base_weekparity (id, parity) FROM stdin;
+1	Первая неделя
+2	Вторая неделя
+3	Третья неделя
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2022-05-01 18:40:59.677669+07	1	Математический анализ	1	[{"added": {}}]	7	1
+2	2022-05-01 18:41:07.72441+07	1	08:30:00 - 10:05:00	1	[{"added": {}}]	12	1
+3	2022-05-01 18:41:28.215319+07	1	Факультет Математики, Информатики и Экономики	1	[{"added": {}}]	9	1
+4	2022-05-01 18:41:31.827834+07	1	Прикладная математика и информатика, ПМИ	1	[{"added": {}}]	10	1
+5	2022-05-01 18:41:52.228678+07	1	ПМИ-19-1, ФИМЭ	1	[{"added": {}}]	13	1
+6	2022-05-01 18:42:00.008154+07	1	Вячкин Евгений Сергеевич	1	[{"added": {}}]	8	1
+7	2022-05-01 18:42:08.787481+07	1	Металлургов 14, 4	1	[{"added": {}}]	11	1
+8	2022-05-01 18:42:17.612466+07	1	Металлургов 14, 4, ауд: 711, этаж 7	1	[{"added": {}}]	14	1
+9	2022-05-01 18:42:23.184345+07	1	fghd	1	[{"added": {}}]	15	1
+10	2022-05-01 19:00:59.48959+07	2	Факультет Филологии	1	[{"added": {}}]	9	1
+11	2022-05-01 19:03:00.74224+07	2	Филологи, ФФ	1	[{"added": {}}]	10	1
+12	2022-05-01 19:03:20.896567+07	2	ФФ-19-1, ФФ	1	[{"added": {}}]	13	1
+13	2022-05-01 19:03:34.7097+07	2	язык	1	[{"added": {}}]	7	1
+14	2022-05-01 19:04:26.46104+07	2	filol	1	[{"added": {}}]	15	1
+15	2022-05-01 20:12:00.864869+07	2	filol	3		15	1
+16	2022-05-01 20:12:00.87048+07	1	fghd	3		15	1
+17	2022-05-01 20:25:15.326846+07	1	1	1	[{"added": {}}]	16	1
+18	2022-05-01 20:26:12.178243+07	1	Четная	1	[{"added": {}}]	17	1
+19	2022-05-01 20:26:19.116748+07	2	Нечетная	1	[{"added": {}}]	17	1
+20	2022-05-01 20:27:36.80054+07	3	first	1	[{"added": {}}]	15	1
+21	2022-05-01 20:27:55.183983+07	2	10:15:00 - 11:50:00	1	[{"added": {}}]	12	1
+22	2022-05-01 20:28:13.835225+07	4	fime	1	[{"added": {}}]	15	1
+23	2022-05-01 20:28:25.989723+07	3	12:15:00 - 13:50:00	1	[{"added": {}}]	12	1
+24	2022-05-01 20:28:42.513267+07	5	first	1	[{"added": {}}]	15	1
+25	2022-05-01 20:29:09.587711+07	2	2	1	[{"added": {}}]	16	1
+26	2022-05-01 20:29:18.64983+07	6	fime	1	[{"added": {}}]	15	1
+27	2022-05-01 20:44:41.490121+07	1	Первая неделя	2	[{"changed": {"fields": ["Parity"]}}]	17	1
+28	2022-05-01 20:44:52.993528+07	2	Вторая неделя	2	[{"changed": {"fields": ["Parity"]}}]	17	1
+29	2022-05-01 21:26:18.908156+07	6	fime	2	[{"changed": {"fields": ["Parity"]}}]	15	1
+30	2022-05-01 21:51:23.641769+07	4	14:00:00 - 15:35:00	1	[{"added": {}}]	12	1
+31	2022-05-01 21:51:31.457702+07	3	Базы данных	1	[{"added": {}}]	7	1
+32	2022-05-01 21:51:32.675033+07	7	pmi	1	[{"added": {}}]	15	1
+33	2022-05-02 08:46:19.682646+07	3	first	2	[{"changed": {"fields": ["Group"]}}]	15	1
+34	2022-05-02 08:46:49.08755+07	3	first	2	[{"changed": {"fields": ["Group"]}}]	15	1
+35	2022-05-02 14:15:29.153871+07	5	first	2	[{"changed": {"fields": ["Day"]}}]	15	1
+36	2022-05-02 14:15:43.32031+07	5	first	2	[{"changed": {"fields": ["Day"]}}]	15	1
+37	2022-05-02 14:42:31.415903+07	5	16:00:00 - 17:35:00	1	[{"added": {}}]	12	1
+38	2022-05-02 14:43:13.970359+07	2	Гаврилова Юлия Сергеевна	1	[{"added": {}}]	8	1
+39	2022-05-02 14:43:52.974201+07	8	first	1	[{"added": {}}]	15	1
+40	2022-05-02 14:44:19.881715+07	8	first	2	[{"changed": {"fields": ["Day"]}}]	15	1
+41	2022-05-02 14:44:39.1916+07	8	first	2	[{"changed": {"fields": ["Parity"]}}]	15	1
+42	2022-05-02 20:42:44.978663+07	4	Филология	1	[{"added": {}}]	7	1
+43	2022-05-02 20:43:34.977928+07	3	Решетникова Елена Васильевна	1	[{"added": {}}]	8	1
+44	2022-05-02 20:44:00.37848+07	3	3	1	[{"added": {}}]	16	1
+45	2022-05-02 20:44:13.548806+07	9	pmi-19-1	1	[{"added": {}}]	15	1
+46	2022-05-02 20:45:21.642453+07	3	Решетникова Е.В	2	[{"changed": {"fields": ["Name"]}}]	8	1
+47	2022-05-02 20:45:28.440071+07	2	Гаврилова Ю.С	2	[{"changed": {"fields": ["Name"]}}]	8	1
+48	2022-05-02 20:45:34.159886+07	1	Вячкин Е.С	2	[{"changed": {"fields": ["Name"]}}]	8	1
+49	2022-05-02 21:19:25.659759+07	3	Третья неделя	1	[{"added": {}}]	17	1
+50	2022-05-02 21:19:28.317113+07	9	pmi-19-1	2	[{"changed": {"fields": ["Parity"]}}]	15	1
+51	2022-05-02 21:19:44.241636+07	9	pmi-19-1	2	[{"changed": {"fields": ["Parity"]}}]	15	1
+52	2022-05-02 21:20:02.123021+07	9	pmi-19-1	2	[{"changed": {"fields": ["Parity"]}}]	15	1
+53	2022-05-03 16:39:31.818236+07	3	Елена	2	[{"changed": {"fields": ["Firstname", "Surname", "Patronymic", "Email", "Image", "Position", "Desc", "Phone"]}}]	8	1
+54	2022-05-03 16:42:26.615649+07	2	Юлия	2	[{"changed": {"fields": ["Firstname", "Surname", "Patronymic", "Email", "Image", "Position"]}}]	8	1
+55	2022-05-03 16:42:34.238327+07	2	Юлия	2	[]	8	1
+56	2022-05-03 16:43:24.102561+07	2	Юлия	2	[]	8	1
+57	2022-05-03 16:44:42.409358+07	1	Евегний	2	[{"changed": {"fields": ["Firstname", "Surname", "Patronymic", "Email", "Image", "Position", "Location"]}}]	8	1
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	base	subject
+8	base	teacher
+9	base	faculty
+10	base	speciality
+11	base	building
+12	base	time
+13	base	group
+14	base	auditory
+15	base	schedule
+16	base	dayofweek
+17	base	weekparity
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2022-04-24 22:36:32.340219+07
+2	auth	0001_initial	2022-04-24 22:36:32.539303+07
+3	admin	0001_initial	2022-04-24 22:36:32.588242+07
+4	admin	0002_logentry_remove_auto_add	2022-04-24 22:36:32.60808+07
+5	admin	0003_logentry_add_action_flag_choices	2022-04-24 22:36:32.628512+07
+6	contenttypes	0002_remove_content_type_name	2022-04-24 22:36:32.670371+07
+7	auth	0002_alter_permission_name_max_length	2022-04-24 22:36:32.696408+07
+8	auth	0003_alter_user_email_max_length	2022-04-24 22:36:32.716272+07
+9	auth	0004_alter_user_username_opts	2022-04-24 22:36:32.739754+07
+10	auth	0005_alter_user_last_login_null	2022-04-24 22:36:32.762228+07
+11	auth	0006_require_contenttypes_0002	2022-04-24 22:36:32.767863+07
+12	auth	0007_alter_validators_add_error_messages	2022-04-24 22:36:32.792373+07
+13	auth	0008_alter_user_username_max_length	2022-04-24 22:36:32.827084+07
+14	auth	0009_alter_user_last_name_max_length	2022-04-24 22:36:32.853091+07
+15	auth	0010_alter_group_name_max_length	2022-04-24 22:36:32.875527+07
+16	auth	0011_update_proxy_permissions	2022-04-24 22:36:32.892366+07
+17	auth	0012_alter_user_first_name_max_length	2022-04-24 22:36:32.911264+07
+18	sessions	0001_initial	2022-04-24 22:36:32.937371+07
+19	base	0001_initial	2022-04-24 22:43:42.612678+07
+20	base	0002_building_faculty_speciality_teacher_time	2022-04-24 22:53:19.413167+07
+21	base	0003_group	2022-04-24 22:57:58.245532+07
+22	base	0004_auditory	2022-04-24 23:00:18.484194+07
+23	base	0005_schedule	2022-04-24 23:14:26.111471+07
+24	base	0006_alter_time_begin_alter_time_ending	2022-04-24 23:26:31.406514+07
+25	base	0007_alter_schedule_date	2022-04-24 23:28:01.243589+07
+26	base	0008_alter_time_begin_alter_time_ending	2022-04-24 23:30:14.5255+07
+27	base	0009_faculty_slug_group_slug_schedule_slug_and_more	2022-05-01 09:25:29.197823+07
+28	base	0010_rename_course_group_year	2022-05-01 09:30:55.803585+07
+29	base	0011_speciality_faculty	2022-05-01 10:06:00.921622+07
+30	base	0012_day_week	2022-05-01 13:58:57.961483+07
+31	base	0013_remove_week_week_delete_day_delete_week	2022-05-01 14:01:16.113927+07
+32	base	0014_remove_schedule_id_name	2022-05-01 17:32:05.747767+07
+33	base	0015_schedule_time_alter_schedule_lesson	2022-05-01 17:39:18.581512+07
+34	base	0016_remove_schedule_time_schedule_id_name_and_more	2022-05-01 17:39:18.679987+07
+35	base	0017_alter_schedule_id_name_alter_schedule_lesson	2022-05-01 17:39:18.716982+07
+36	base	0018_day	2022-05-01 17:50:14.661384+07
+37	base	0019_remove_schedule_date_day_schedule_alter_day_day	2022-05-01 18:33:08.579825+07
+38	base	0020_schedule_date_delete_day	2022-05-01 18:33:08.612828+07
+39	base	0021_alter_schedule_date_alter_schedule_id_name_and_more	2022-05-01 18:39:38.638901+07
+40	base	0022_day_week	2022-05-01 18:39:38.733666+07
+41	base	0023_remove_week_week_delete_day_delete_week	2022-05-01 18:39:38.78128+07
+42	base	0024_remove_schedule_date	2022-05-01 18:39:38.815911+07
+43	base	0025_remove_schedule_auditory_remove_schedule_group_and_more	2022-05-01 18:39:38.936481+07
+44	base	0026_remove_auditory_building_remove_auditory_floor_and_more	2022-05-01 18:39:39.091042+07
+45	base	0027_auditory_building_auditory_floor_and_more	2022-05-01 18:39:39.434174+07
+46	base	0028_day	2022-05-01 18:39:39.450195+07
+47	base	0029_alter_day_day	2022-05-01 18:39:39.461927+07
+48	base	0030_alter_day_day	2022-05-01 18:39:39.47215+07
+49	base	0031_day_xui	2022-05-01 18:39:39.482364+07
+50	base	0032_delete_day	2022-05-01 18:39:39.491536+07
+51	base	0033_dayofweek_weekparity_remove_schedule_date_and_more	2022-05-01 20:23:37.512935+07
+52	base	0034_alter_schedule_options_rename_name_teacher_firstname_and_more	2022-05-03 16:35:57.902879+07
+53	base	0035_remove_teacher_desc_teacher_location_and_more	2022-05-03 16:42:21.32242+07
+54	base	0036_alter_teacher_firstname	2022-05-03 16:44:52.236294+07
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+ri7y2jd1uf5tx6ghtewkc6llv56tz5kg	.eJxVjDsOwjAQBe_iGlnryJ8sJT1nsNbeNQ4gW8qnQtwdIqWA9s3Me6lI21rjtsgcJ1ZnZdTpd0uUH9J2wHdqt65zb-s8Jb0r-qCLvnaW5-Vw_w4qLfVbiy9eIKHYZAMiu4CFRmOACwOKAA48jIUyweC8tzkDegMhFMc2GK_eH_EiN7c:1nl7wL:FsnUuqitXWEEIn9ukBbfAlKdaZx_WP1jSS7ec6wFZbU	2022-05-15 18:40:37.228943+07
+nryv9c8ka8db3wnrjcvmpz213s6f1k3t	.eJxVjDsOwjAQBe_iGlnryJ8sJT1nsNbeNQ4gW8qnQtwdIqWA9s3Me6lI21rjtsgcJ1ZnZdTpd0uUH9J2wHdqt65zb-s8Jb0r-qCLvnaW5-Vw_w4qLfVbiy9eIKHYZAMiu4CFRmOACwOKAA48jIUyweC8tzkDegMhFMc2GK_eH_EiN7c:1nlL6V:8UEt9CSjhyKtC2Xj3tqS_UL-sNFmLA30luiAUf4DKN4	2022-05-16 08:43:59.618447+07
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 68, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 1, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: base_auditory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_auditory_id_seq', 1, true);
+
+
+--
+-- Name: base_building_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_building_id_seq', 1, true);
+
+
+--
+-- Name: base_dayofweek_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_dayofweek_id_seq', 3, true);
+
+
+--
+-- Name: base_faculty_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_faculty_id_seq', 2, true);
+
+
+--
+-- Name: base_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_group_id_seq', 2, true);
+
+
+--
+-- Name: base_schedule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_schedule_id_seq', 9, true);
+
+
+--
+-- Name: base_speciality_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_speciality_id_seq', 2, true);
+
+
+--
+-- Name: base_subject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_subject_id_seq', 4, true);
+
+
+--
+-- Name: base_teacher_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_teacher_id_seq', 3, true);
+
+
+--
+-- Name: base_time_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_time_id_seq', 5, true);
+
+
+--
+-- Name: base_weekparity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.base_weekparity_id_seq', 3, true);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 57, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 17, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 54, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: base_auditory base_auditory_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_auditory
+    ADD CONSTRAINT base_auditory_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_building base_building_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_building
+    ADD CONSTRAINT base_building_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_dayofweek base_dayofweek_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_dayofweek
+    ADD CONSTRAINT base_dayofweek_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_faculty base_faculty_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_faculty
+    ADD CONSTRAINT base_faculty_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_group base_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_group
+    ADD CONSTRAINT base_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_schedule base_schedule_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_speciality base_speciality_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_speciality
+    ADD CONSTRAINT base_speciality_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_subject base_subject_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_subject
+    ADD CONSTRAINT base_subject_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_teacher base_teacher_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_teacher
+    ADD CONSTRAINT base_teacher_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_time base_time_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_time
+    ADD CONSTRAINT base_time_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: base_weekparity base_weekparity_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_weekparity
+    ADD CONSTRAINT base_weekparity_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: base_auditory_building_id_0c865117; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_auditory_building_id_0c865117 ON public.base_auditory USING btree (building_id);
+
+
+--
+-- Name: base_faculty_slug_ed306bb3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_faculty_slug_ed306bb3 ON public.base_faculty USING btree (slug);
+
+
+--
+-- Name: base_faculty_slug_ed306bb3_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_faculty_slug_ed306bb3_like ON public.base_faculty USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: base_group_faculty_id_f49f1727; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_group_faculty_id_f49f1727 ON public.base_group USING btree (faculty_id);
+
+
+--
+-- Name: base_group_slug_7ed83506; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_group_slug_7ed83506 ON public.base_group USING btree (slug);
+
+
+--
+-- Name: base_group_slug_7ed83506_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_group_slug_7ed83506_like ON public.base_group USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: base_group_speciality_id_61649eb9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_group_speciality_id_61649eb9 ON public.base_group USING btree (speciality_id);
+
+
+--
+-- Name: base_schedule_auditory_id_b933e9f6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_auditory_id_b933e9f6 ON public.base_schedule USING btree (auditory_id);
+
+
+--
+-- Name: base_schedule_day_id_b2eb0b90; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_day_id_b2eb0b90 ON public.base_schedule USING btree (day_id);
+
+
+--
+-- Name: base_schedule_group_id_f79c0c9f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_group_id_f79c0c9f ON public.base_schedule USING btree (group_id);
+
+
+--
+-- Name: base_schedule_id_name_id_214d5729; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_id_name_id_214d5729 ON public.base_schedule USING btree (id_name_id);
+
+
+--
+-- Name: base_schedule_lesson_id_b725f198; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_lesson_id_b725f198 ON public.base_schedule USING btree (lesson_id);
+
+
+--
+-- Name: base_schedule_parity_id_1d018b6f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_parity_id_1d018b6f ON public.base_schedule USING btree (parity_id);
+
+
+--
+-- Name: base_schedule_slug_f03f5dff; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_slug_f03f5dff ON public.base_schedule USING btree (slug);
+
+
+--
+-- Name: base_schedule_slug_f03f5dff_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_slug_f03f5dff_like ON public.base_schedule USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: base_schedule_teacher_id_c9ded25f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_schedule_teacher_id_c9ded25f ON public.base_schedule USING btree (teacher_id);
+
+
+--
+-- Name: base_speciality_faculty_id_0e178a1e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_speciality_faculty_id_0e178a1e ON public.base_speciality USING btree (faculty_id);
+
+
+--
+-- Name: base_speciality_slug_b3ec5c2f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_speciality_slug_b3ec5c2f ON public.base_speciality USING btree (slug);
+
+
+--
+-- Name: base_speciality_slug_b3ec5c2f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_speciality_slug_b3ec5c2f_like ON public.base_speciality USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: base_teacher_slug_70a8aeed; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_teacher_slug_70a8aeed ON public.base_teacher USING btree (slug);
+
+
+--
+-- Name: base_teacher_slug_70a8aeed_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX base_teacher_slug_70a8aeed_like ON public.base_teacher USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_auditory base_auditory_building_id_0c865117_fk_base_building_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_auditory
+    ADD CONSTRAINT base_auditory_building_id_0c865117_fk_base_building_id FOREIGN KEY (building_id) REFERENCES public.base_building(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_group base_group_faculty_id_f49f1727_fk_base_faculty_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_group
+    ADD CONSTRAINT base_group_faculty_id_f49f1727_fk_base_faculty_id FOREIGN KEY (faculty_id) REFERENCES public.base_faculty(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_group base_group_speciality_id_61649eb9_fk_base_speciality_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_group
+    ADD CONSTRAINT base_group_speciality_id_61649eb9_fk_base_speciality_id FOREIGN KEY (speciality_id) REFERENCES public.base_speciality(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_schedule base_schedule_auditory_id_b933e9f6_fk_base_auditory_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_auditory_id_b933e9f6_fk_base_auditory_id FOREIGN KEY (auditory_id) REFERENCES public.base_auditory(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_schedule base_schedule_day_id_b2eb0b90_fk_base_dayofweek_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_day_id_b2eb0b90_fk_base_dayofweek_id FOREIGN KEY (day_id) REFERENCES public.base_dayofweek(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_schedule base_schedule_group_id_f79c0c9f_fk_base_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_group_id_f79c0c9f_fk_base_group_id FOREIGN KEY (group_id) REFERENCES public.base_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_schedule base_schedule_id_name_id_214d5729_fk_base_subject_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_id_name_id_214d5729_fk_base_subject_id FOREIGN KEY (id_name_id) REFERENCES public.base_subject(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_schedule base_schedule_lesson_id_b725f198_fk_base_time_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_lesson_id_b725f198_fk_base_time_id FOREIGN KEY (lesson_id) REFERENCES public.base_time(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_schedule base_schedule_parity_id_1d018b6f_fk_base_weekparity_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_parity_id_1d018b6f_fk_base_weekparity_id FOREIGN KEY (parity_id) REFERENCES public.base_weekparity(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_schedule base_schedule_teacher_id_c9ded25f_fk_base_teacher_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_schedule
+    ADD CONSTRAINT base_schedule_teacher_id_c9ded25f_fk_base_teacher_id FOREIGN KEY (teacher_id) REFERENCES public.base_teacher(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: base_speciality base_speciality_faculty_id_0e178a1e_fk_base_faculty_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.base_speciality
+    ADD CONSTRAINT base_speciality_faculty_id_0e178a1e_fk_base_faculty_id FOREIGN KEY (faculty_id) REFERENCES public.base_faculty(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

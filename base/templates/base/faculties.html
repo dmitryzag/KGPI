@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+<div class="column is-12">
+    <div class="card">
+        <div class="card-content">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="/">Расписание</a></li>
+                    <li><a href="/faculties" class="disabled">Факультеты</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <h1>Факультеты</h1>
+
+                {% for faculty in faculties %}
+
+                <a href="{{faculty.get_absolute_url}}">{{faculty}}</a>
+                <br>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+<div class="column"></div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load define_action %}
+
+<table class="table is-bordered is-striped is-hoverable">
+    <caption class="has-text-weight-bold mb-4 has-text-black">{{items.2}}</caption>
+    <thead>
+        <tr>
+            <th colspan="2">День недели</th>
+            <th>Предмет</th>
+            <th>Аудитория</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for weekday in weekdays %}
+        {% with i=0 %}
+        {% for day in weekday.week %}
+        <tr>
+            {% if i == 0 %}
+            <th rowspan="{{weekday.week|length}}">{{day.day.week|date:"l"}}</th>
+            {% define 1 as i %}
+            {% endif %}
+            <td>{{day.lesson}}</td>
+            <td>{{day.id_name}}, <a href="/teachers/{{day.teacher.slug}}">{{day.teacher}}</a>,
+                {{day.lesson_type}} </td>
+            <td><abbr title="{{day.auditory}}">{{day.auditory.num_auditory}}/{{day.auditory.building.enclosure}}</abbr>
+            </td>
+        </tr>
+        {% endfor %}
+        {% define 0 as i%}
+        {% endwith %}
+        {% endfor %}
+    </tbody>
+</table>

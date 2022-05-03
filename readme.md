@@ -10,4 +10,4 @@ sudo -u postgres psql -c "alter user $(whoami) createdb;" \
 sudo -u postgres psql -c "create database django_db with owner $(whoami);" \
 python3 manage.py runserver\
 
-поменять в settings.py в DATABASES имя базы данных на Ваше\
+поменять в settings.py в DATABASES имя базы данных на Ваше

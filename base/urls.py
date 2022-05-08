@@ -8,8 +8,6 @@ urlpatterns = [
     path('faculties/<str:facul>/', views.specialities),
     path('faculties/<str:facul>/<str:special>/', views.groups),
     path('faculties/<str:facul>/<str:special>/<str:group>/', views.schedule),
-
-
     # path('faculties/<str:args>/', views.specialities),
     # path('schedule/', views.schedule),
 

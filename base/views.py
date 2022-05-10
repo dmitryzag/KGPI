@@ -1,4 +1,4 @@
-from .models import Faculty, Schedule, Speciality, Group, WeekParity, DayOfWeek
+from .models import Faculty, Schedule, Speciality, Group, Teacher, WeekParity, DayOfWeek
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.db.models import Count
@@ -39,16 +39,7 @@ def schedule(req, facul, special, group):
 
     for i in range(1, schedule.get('parity') + 1):
         a.append(Schedule.objects.filter(parity=i, group__slug=group))
-
-    # weeks = DayOfWeek.objects.all()
-
     weekdays = []
-
-    # for week in weeks:
-    #     week = {'week': Schedule.objects.filter(
-    #         day=week, group__slug=group, parity=1)}
-    #     weekdays.append(week)
-
     for i in range(1, schedule.get('parity') + 1):
         b = []
         weeks = DayOfWeek.objects.all()
@@ -71,3 +62,32 @@ def schedule(req, facul, special, group):
     context = {'items': items, 'weekdays': weekdays, 'page_obj': page_obj}
 
     return render(req, 'base/schedule.html', context)
+
+
+def teacher(req, teacher):
+    teach = Teacher.objects.get(slug=teacher)
+    schedule = Schedule.objects.values(
+        'parity').distinct().aggregate(parity=Count('parity'))
+
+    a = []
+
+    for i in range(1, schedule.get('parity') + 1):
+        a.append(Schedule.objects.filter(parity=i, teacher__slug=teacher))
+
+    weekdays = []
+    for i in range(1, schedule.get('parity') + 1):
+        b = []
+        weeks = DayOfWeek.objects.all()
+        for week in weeks:
+            week = {'week': Schedule.objects.filter(
+                day=week, teacher__slug=teacher, parity=i)}
+            b.append(week)
+        weekdays.append(b)
+        b = []
+
+    paginator = Paginator(weekdays, 1)
+    page_number = req.GET.get('page', 1)
+    page_obj = paginator.page(page_number)
+    print(teach.image)
+    context = {'weekdays': weekdays, 'page_obj': page_obj, 'teach': teach}
+    return render(req, 'base/teacher.html', context)

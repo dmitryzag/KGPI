@@ -4,7 +4,7 @@ a.disabled {
     color: #888;/* цвет текста серый */
     }
 
-body {
+html {
     background-color: #dae2ea;
     height: 100vh;
 }
@@ -38,4 +38,13 @@ a.navbar-link:hover {
 
 th {
     background-color: white;
+    
+}
+
+.table.is-bordered td, .table.is-bordered th{
+    border-left:0px;
+}
+
+.footer{
+    background-color: #dae2ea !important;
 }

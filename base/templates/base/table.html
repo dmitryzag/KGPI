@@ -1,12 +1,16 @@
-{% include 'pagination.html' %}
 {% load define_action %}
-<table class="table is-bordered is-striped is-hoverable">
-    <caption class="has-text-weight-bold mb-4 has-text-black">{{items.2}}</caption>
+<table class="table is-bordered is-striped is-hoverable is-narrow">
+
+    <caption class="has-text-weight-bold mb-4 has-text-black has-text-left is-size-3">
+        {% if items.2 %}{{items.2}}{% else %}{{teach.surname}} {{teach.firstname}} {{teach.patronymic}}{% endif %} <span
+            class="is-size-5 has-text-right has-text-primary	">
+            {{page_obj.number}} неделя</span>
+    </caption>
     <thead>
         <tr>
-            <th colspan="2">День недели</th>
-            <th>Предмет</th>
-            <th>Аудитория</th>
+            <th colspan="2" class="has-text-left is-size-5">День недели</th>
+            <th class="is-size-5">Предмет</th>
+            <th class="is-size-5">Аудитория</th>
         </tr>
     </thead>
     <tbody>
@@ -16,13 +20,14 @@
         {% for day in weekday.week %}
         <tr>
             {% if i == 0 %}
-            <th rowspan="{{weekday.week|length}}">{{day.day.week|date:"l"}}</th>
+            <th rowspan="{{weekday.week|length}}" class="is-size-5 has-text-left">{{day.day.week|date:"D"}}</th>
             {% define 1 as i %}
             {% endif %}
-            <td>{{day.lesson}}</td>
+            <td class="is-narrow ">{{day.lesson}}</td>
             <td>{{day.id_name}}, <a href="/teachers/{{day.teacher.slug}}">{{day.teacher}}</a>,
                 {{day.lesson_type}} </td>
-            <td><abbr title="{{day.auditory}}">{{day.auditory.num_auditory}}/{{day.auditory.building.enclosure}}</abbr>
+            <td class="is-narrow"><abbr
+                    title="{{day.auditory}}">{{day.auditory.num_auditory}}/{{day.auditory.building.enclosure}}</abbr>
             </td>
         </tr>
         {% endfor %}

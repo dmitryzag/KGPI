@@ -23,7 +23,7 @@ class Teacher(models.Model):
     patronymic = models.TextField(null=True)
     slug = models.SlugField(null=True)
     email = models.EmailField(null=True)
-    image = models.ImageField(upload_to='media/', null=True)
+    image = models.ImageField(upload_to='teachers/', null=True)
     position = models.TextField(null=True, blank=True)
     location = models.TextField(null=True, blank=True)
     phone = models.TextField(null=True, blank=True)

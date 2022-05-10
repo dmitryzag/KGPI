@@ -12,3 +12,5 @@ python3 manage.py runserver\
 
 поменять в settings.py в DATABASES имя базы данных на Ваше
 ![image](https://user-images.githubusercontent.com/78315545/167538531-5cb6d5c4-94a5-4617-87a6-2420f0107783.png)
+Расписание преподавателя:
+![image](https://user-images.githubusercontent.com/78315545/167538728-653a0f23-5c67-45be-8d72-89bfa85ed0c9.png)
